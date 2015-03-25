@@ -130,7 +130,7 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
  
-        $entity = $em->getRepository('IbwJobeetBundle:Job')->findOneByToken($token);
+        $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneByToken($token);
  
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
@@ -139,7 +139,7 @@ class JobController extends Controller
         $editForm = $this->createForm(new JobType(), $entity);
         $deleteForm = $this->createDeleteForm($token);
  
-        return $this->render('IbwJobeetBundle:Job:edit.html.twig', array(
+        return $this->render('EnsJobeetBundle:Job:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -150,7 +150,7 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
  
-        $entity = $em->getRepository('IbwJobeetBundle:Job')->findOneByToken($token);
+        $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneByToken($token);
  
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
@@ -165,10 +165,10 @@ class JobController extends Controller
             $em->persist($entity);
             $em->flush();
  
-            return $this->redirect($this->generateUrl('ibw_job_edit', array('token' => $token)));
+            return $this->redirect($this->generateUrl('ens_job_edit', array('token' => $token)));
         }
  
-        return $this->render('IbwJobeetBundle:Job:edit.html.twig', array(
+        return $this->render('EnsJobeetBundle:Job:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -213,20 +213,22 @@ class JobController extends Controller
     public function previewAction($token)
     {
         $em = $this->getDoctrine()->getManager();
- 
+
         $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneByToken($token);
- 
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
         }
-        
-        $deleteForm = $this->createDeleteForm($entity->getToken());
+
+        $deleteForm = $this->createDeleteForm($entity->getId());
         $publishForm = $this->createPublishForm($entity->getToken());
+        $extendForm = $this->createExtendForm($entity->getToken());
 
         return $this->render('EnsJobeetBundle:Job:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
             'publish_form' => $publishForm->createView(),
+            'extend_form' => $extendForm->createView(),
         ));
     }
     
@@ -265,4 +267,45 @@ class JobController extends Controller
             ->getForm()
         ;
     }
+    
+    public function extendAction(Request $request, $token)
+    {
+        $form = $this->createExtendForm($token);
+        $request = $this->getRequest();
+
+        $form->bind($request);
+
+        if($form->isValid()) {
+            $em=$this->getDoctrine()->getManager();
+            $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneByToken($token);
+
+            if(!$entity){
+                throw $this->createNotFoundException('Unable to find Job entity.');
+            }
+
+            if(!$entity->extend()){
+                throw $this->createNodFoundException('Unable to extend the Job');
+            }
+
+            $em->persist($entity);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('notice', sprintf('Your job validity has been extended until %s', $entity->getExpiresAt()->format('m/d/Y')));
+        }
+
+        return $this->redirect($this->generateUrl('ens_job_preview', array(
+            'company' => $entity->getCompanySlug(),
+            'location' => $entity->getLocationSlug(),
+            'token' => $entity->getToken(),
+            'position' => $entity->getPositionSlug()
+        )));
+    }
+
+    private function createExtendForm($token)
+    {
+        return $this->createFormBuilder(array('token' => $token))
+            ->add('token', 'hidden')
+            ->getForm();
+    }
+    
 }
