@@ -57,13 +57,6 @@ class JobController extends Controller
                 'id' => $entity->getId(),
                 'position' => $entity->getPositionSlug()
             )));
-            
-            return $this->redirect($this->generateUrl('ens_job_preview', array(
-                'company' => $entity->getCompanySlug(),
-                'location' => $entity->getLocationSlug(),
-                'token' => $entity->getToken(),
-                'position' => $entity->getPositionSlug()
-            )));
         }
  
         return $this->render('EnsJobeetBundle:Job:new.html.twig', array(
@@ -137,7 +130,7 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
  
-        $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneByToken($token);
+        $entity = $em->getRepository('IbwJobeetBundle:Job')->findOneByToken($token);
  
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
@@ -146,7 +139,7 @@ class JobController extends Controller
         $editForm = $this->createForm(new JobType(), $entity);
         $deleteForm = $this->createDeleteForm($token);
  
-        return $this->render('EnsJobeetBundle:Job:edit.html.twig', array(
+        return $this->render('IbwJobeetBundle:Job:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -157,7 +150,7 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
  
-        $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneByToken($token);
+        $entity = $em->getRepository('IbwJobeetBundle:Job')->findOneByToken($token);
  
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
@@ -172,17 +165,10 @@ class JobController extends Controller
             $em->persist($entity);
             $em->flush();
  
-            return $this->redirect($this->generateUrl('ens_job_edit', array('token' => $token)));
-            
-            return $this->redirect($this->generateUrl('ens_job_preview', array(
-                'company' => $entity->getCompanySlug(),
-                'location' => $entity->getLocationSlug(),
-                'token' => $entity->getToken(), 
-                'position' => $entity->getPositionSlug()
-            )));
+            return $this->redirect($this->generateUrl('ibw_job_edit', array('token' => $token)));
         }
  
-        return $this->render('EnsJobeetBundle:Job:edit.html.twig', array(
+        return $this->render('IbwJobeetBundle:Job:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
