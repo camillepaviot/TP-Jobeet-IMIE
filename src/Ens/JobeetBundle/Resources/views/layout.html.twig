@@ -17,7 +17,17 @@
   <body>
     <div id="container">
       <div id="header">
-        <div class="content">
+        <div id="job_history">
+            Recent viewed jobs:
+            <ul>
+                {% for job in app.session.get('job_history') %}
+                    <li>
+                        <a href="{{ path('ibw_job_show', { 'id': job.id, 'company': job.companyslug, 'location': job.locationslug, 'position': job.positionslug }) }}">{{ job.position }} - {{ job.company }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="content">
           <h1><a href="{{ path('EnsJobeetBundle_homepage') }}">
             <img src="{{ asset('bundles/ensjobeet/images/logo.jpg') }}" alt="Jobeet Job Board" />
           </a></h1>
