@@ -1,0 +1,4 @@
+ens_jobeet_rest_product:
+    type: rest
+    resource: 'Ens\JobeetBundle\Controller\RestProductController'
+    name_prefix: ens_api_product_

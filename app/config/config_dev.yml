@@ -46,3 +46,15 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+
+#bazinga faker configuration
+bazinga_faker:
+    orm: doctrine
+    entities:
+        Ens\JobeetBundle\Entity\Product:
+            number: 10
+            custom_formatters:
+                name: { method: word }
+                price: { method: numberBetween, parameters: [ 1, 999 ] }
+                description: { method: sentence, parameters: [ 6 ] }
