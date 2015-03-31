@@ -1,15 +1,16 @@
 <?php
 
 namespace Ens\JobeetBundle\Admin;
-
+ 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
-
-class JobAdmin extends Admin {
+use Ens\JobeetBundle\Entity\Job;
+ 
+class JobAdmin extends Admin
+{
 
     // setup the defaut sort column and order
     protected $datagridValues = array(
@@ -88,7 +89,7 @@ class JobAdmin extends Admin {
                 ->add('category')
                 ->add('type')
                 ->add('company')
-                ->add('webPath', 'string', array('template' => 'ErlemJobeetBundle:JobAdmin:list_image.html.twig'))
+                ->add('webPath', 'string', array('template' => 'EnsJobeetBundle:JobAdmin:list_image.html.twig'))
                 ->add('url')
                 ->add('position')
                 ->add('location')

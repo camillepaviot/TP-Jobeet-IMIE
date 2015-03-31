@@ -20,103 +20,105 @@
 {% endblock %}
  
 {% block content %}
-    <h1>Job edit</h1>
-    <form action="{{ path('ens_job_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-        <table id="job_form">
-            <tfoot>
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" value="Preview your job" />
-                    </td>
-                </tr>
-            </tfoot>
-            <tbody>
-                <tr>
-                    <th>{{ form_label(edit_form.category) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.category) }}
-                        {{ form_widget(edit_form.category) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.type) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.type) }}
-                        {{ form_widget(edit_form.type) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.company) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.company) }}
-                        {{ form_widget(edit_form.company) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.file) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.file) }}
-                        {{ form(edit_form.file) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.url) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.url) }}
-                        {{ form_widget(edit_form.url) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.position) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.position) }}
-                        {{ form_widget(edit_form.position) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.location) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.location) }}
-                        {{ form_widget(edit_form.location) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.description) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.description) }}
-                        {{ form_widget(edit_form.description) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.how_to_apply) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.how_to_apply) }}
-                        {{ form_widget(edit_form.how_to_apply) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.token) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.token) }}
-                        {{ form_widget(edit_form.token) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.is_public) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.is_public) }}
-                        {{ form_widget(edit_form.is_public) }}
-                        <br /> Whether the job can also be published on affiliate websites or not.
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(edit_form.email) }}</th>
-                    <td>
-                        {{ form_errors(edit_form.email) }}
-                        {{ form_widget(edit_form.email) }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-xs-12">
+        <h1>Job edit</h1>
+    </div>
+    <form action="{{ path('ens_job_edit', { 'token': entity.token }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <div id="job_form">
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.category) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.category) }}
+                {{ form_widget(edit_form.category) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.type) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.type) }}
+                {{ form_widget(edit_form.type) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.company) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.company) }}
+                {{ form_widget(edit_form.company) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.file) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.file) }}
+                {{ form_widget(edit_form.file) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.url) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.url) }}
+                {{ form_widget(edit_form.url) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.position) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.position) }}
+                {{ form_widget(edit_form.position) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.location) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.location) }}
+                {{ form_widget(edit_form.location) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.description) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.description) }}
+                {{ form_widget(edit_form.description) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.how_to_apply) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.how_to_apply) }}
+                {{ form_widget(edit_form.how_to_apply) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.is_public) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.is_public) }}
+                {{ form_widget(edit_form.is_public) }}
+            </div>
+            <br class="clean"><br/>
+            <div class="col-xs-12 col-sm-3">
+                {{ form_label(edit_form.email) }}
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                {{ form_errors(edit_form.email) }}
+                {{ form_widget(edit_form.email) }}
+            </div>
+            <br class="clean">
+            <br/>
+            <div class="col-xs-12">
+                <input type="submit" value="Preview your job" />
+            </div>
+
+        </div>
+
     {{ form_end(edit_form) }}
 {% endblock %}

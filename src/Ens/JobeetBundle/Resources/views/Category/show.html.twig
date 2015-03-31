@@ -10,9 +10,10 @@
 {% endblock %}
  
 {% block content %}
+<div class="col-xs-12">
   <div class="category">
     <div class="feed">
-        <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug, '_format': 'atom' }) }}">Feed</a>
+        <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug, '_format': 'atom' }) }}"><i class="fa fa-rss"></i> Feed</a>
     </div>
     <h1>{{ category.name }}</h1>
   </div>
@@ -54,4 +55,5 @@
       - page <strong>{{ current_page }}/{{ last_page }}</strong>
     {% endif %}
   </div>
+</div>
 {% endblock %}
