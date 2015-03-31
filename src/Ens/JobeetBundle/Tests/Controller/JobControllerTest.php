@@ -293,7 +293,7 @@ class JobControllerTest extends WebTestCase
     
     public function testEditJob()
     {
-        $client = $this->createJob(array('job[position]' => 'FOO3'), true);
+        $client = $this->createJob(array('job[position]' => 'FOO3'), false);
         $crawler = $client->getCrawler();
         $crawler = $client->request('GET', sprintf('/job/%s/edit', $this->getJobByPosition('FOO3')->getToken()));
         $this->assertTrue(404 === $client->getResponse()->getStatusCode());
