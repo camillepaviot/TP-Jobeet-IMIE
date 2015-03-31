@@ -3,7 +3,7 @@
   margin: 4px 15px;
   float: right;
   line-height: 25px;
-  background-position: left center;
+  background: none;
 }
 
 .category .feed a
@@ -20,7 +20,7 @@
 
 .jobs tr.even
 {
-  background-color: #f3fafc;
+  background-color: #f5f5f5;
 }
 
 .jobs tr.odd
@@ -29,19 +29,25 @@
 
 .jobs tr:hover
 {
-  background-color: #fff;
+  background-color: #ffffff;
 }
+
 
 .jobs td
 {
   padding: 12px 15px;
-  border-bottom: 1px dotted #999;
+  border-bottom: 1px solid #ddd
 }
 
 .jobs td.position,
 .jobs td.location
 {
-  border-right: 1px dotted #999;
+  /*border-right: 1px dotted #999;*/
+}
+
+.jobs tr:first-child td
+{
+  border-top: none;
 }
 
 .jobs .location
@@ -53,14 +59,14 @@
 
 .jobs .company
 {
-  color: #d2813f;
+  color: #d70913;
   width: 30%;
 }
 
 .jobs .position
 {
   padding: 0;
-  color: #524F46;
+  color: #176f94;
   width: 40%;
 }
 

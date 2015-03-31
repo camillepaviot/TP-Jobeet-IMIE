@@ -9,9 +9,4 @@
 /vendor/
 /bin/
 /composer.phar
-/web/bundles/acmedemo
-/web/bundles/framework
-/web/bundles/sensiodistribution
-/web/bundles/sonataadmin
-/web/bundles/sonatacore
-/web/bundles/sonatajquery
+/web/bundles/
