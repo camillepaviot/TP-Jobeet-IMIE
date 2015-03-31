@@ -13,6 +13,7 @@
         {% block javascripts %}
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('bundles/ensjobeet/images/favicon.ico') }}" />
+        <link rel="alternate" type="application/atom+xml" title="Latest Jobs" href="{{ url('ens_job', {'_format': 'atom'}) }}" />
 
         <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/font-awesome/css/font-awesome.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/bootstrap/css/bootstrap.min.css') }}"/>
@@ -69,6 +70,7 @@
         <div id="job_history" class="container">
             <div class="row">
                 <div class="col-xs-12">
+                    <br/>
                     Recent viewed jobs:
                     <ul>
                         {% for job in app.session.get('job_history') %}
@@ -109,7 +111,7 @@
                         </span>
                         <ul>
                             <li><a href="">About Jobeet</a></li>
-                            <li><i class="fa fa-rss" style="color: #ffffff;"></i> <a href="">Full feed</a></li>
+                            <li><a href="{{ path('ens_job', {'_format': 'atom'}) }}"><i class="fa fa-rss"></i> Full feed</a></li>
                             <li><a href="">Jobeet API</a></li>
                             <li class="last"><a href="">Affiliates</a></li>
                         </ul>

@@ -142,32 +142,46 @@ class Category
         return $this->category_affiliates;
     }
     
+    /**
+     * 
+     * @return type
+     */
     public function __toString()
     {
       return $this->getName();
     }
     
-    
+    /**
+     * 
+     * @param type $jobs
+     */
     public function setActiveJobs($jobs)
     {
         $this->active_jobs = $jobs;
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public function getActiveJobs()
     {
         return $this->active_jobs;
     }
     
-    /*public function getSlug()
-    {
-        return Jobeet::slugify($this->getName());
-    }*/
-    
+    /**
+     * 
+     * @param type $jobs
+     */
     public function setMoreJobs($jobs)
     {
         $this->more_jobs = $jobs >=  0 ? $jobs : 0;
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public function getMoreJobs()
     {
         return $this->more_jobs;
@@ -177,7 +191,6 @@ class Category
      * @var string
      */
     private $slug;
-
 
     /**
      * Set slug
@@ -201,6 +214,7 @@ class Category
     {
         return $this->slug;
     }
+    
     /**
      * @ORM\PrePersist
      */

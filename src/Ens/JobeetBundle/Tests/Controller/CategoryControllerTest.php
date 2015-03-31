@@ -12,8 +12,18 @@ use Doctrine\Bundle\DoctrineBundle\Command\Proxy\CreateSchemaDoctrineCommand;
  
 class CategoryControllerTest extends WebTestCase
 {
+    /**
+     *
+     * @var type 
+     */
     private $em;
+    
+    /**
+     *
+     * @var type 
+     */
     private $application;
+    
     public function setUp()
     {
         static::$kernel = static::createKernel();
@@ -65,7 +75,7 @@ class CategoryControllerTest extends WebTestCase
         $executor = new \Doctrine\Common\DataFixtures\Executor\ORMExecutor($this->em, $purger);
         $executor->execute($loader->getFixtures());
     }
- 
+    
     public function testShow()
     {
         $kernel = static::createKernel();

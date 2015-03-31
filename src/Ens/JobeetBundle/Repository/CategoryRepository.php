@@ -2,9 +2,13 @@
 
 namespace Ens\JobeetBundle\Repository;
 use Doctrine\ORM\EntityRepository;
- 
+
 class CategoryRepository extends EntityRepository
 {
+    /**
+     * 
+     * @return type
+     */
     public function getWithJobs()
     {
         $query = $this->getEntityManager()

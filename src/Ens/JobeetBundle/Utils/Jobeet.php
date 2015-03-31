@@ -9,6 +9,11 @@
 namespace Ens\JobeetBundle\Utils;
 class Jobeet
 {
+    /**
+     * 
+     * @param type $text
+     * @return string
+     */
     static public function slugify($text)
     {
       // replace non letter or digits by -

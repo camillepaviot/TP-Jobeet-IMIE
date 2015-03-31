@@ -78,22 +78,35 @@ class User implements UserInterface
     {
         return $this->password;
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public function getRoles()
     {
         return array('ROLE_ADMIN');
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public function getSalt()
     {
         return null;
     }
- 
+    
     public function eraseCredentials()
     {
  
     }
- 
+    
+    /**
+     * 
+     * @param \Ens\JobeetBundle\Entity\User $user
+     * @return type
+     */
     public function equals(User $user)
     {
         return $user->getUsername() == $this->getUsername();

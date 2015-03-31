@@ -2,9 +2,16 @@
 
 namespace Ens\JobeetBundle\Repository;
 use Doctrine\ORM\EntityRepository;
- 
+
 class JobRepository extends EntityRepository
 {
+    /**
+     * 
+     * @param type $category_id
+     * @param type $max
+     * @param type $offset
+     * @return type
+     */
     public function getActiveJobs($category_id = null, $max = null, $offset = null)
     {
         $qb = $this->createQueryBuilder('j')
@@ -31,7 +38,12 @@ class JobRepository extends EntityRepository
  
         return $query->getResult();
     }
- 
+    
+    /**
+     * 
+     * @param type $category_id
+     * @return type
+     */
     public function countActiveJobs($category_id = null)
     {
         $qb = $this->createQueryBuilder('j')
@@ -50,7 +62,12 @@ class JobRepository extends EntityRepository
  
         return $query->getSingleScalarResult();
     }
- 
+    
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
     public function getActiveJob($id)
     {
         $query = $this->createQueryBuilder('j')
@@ -72,6 +89,11 @@ class JobRepository extends EntityRepository
         return $job;
     }
     
+    /**
+     * 
+     * @param type $days
+     * @return type
+     */
     public function cleanup($days)
     {
         $query = $this->createQueryBuilder('j')
@@ -82,5 +104,34 @@ class JobRepository extends EntityRepository
             ->getQuery();
 
         return $query->execute();
+    }
+    
+    /**
+     * 
+     * @param type $category_id
+     * @return type
+     */
+    public function getLatestPost($category_id = null)
+    {
+        $query = $this->createQueryBuilder('j')
+            ->where('j.expires_at > :date')
+            ->setParameter('date', date('Y-m-d H:i:s', time()))
+            ->andWhere('j.is_activated = :activated')
+            ->setParameter('activated', 1)
+            ->orderBy('j.expires_at', 'DESC')
+            ->setMaxResults(1);
+ 
+        if($category_id) {
+            $query->andWhere('j.category = :category_id')
+                ->setParameter('category_id', $category_id);
+        }
+ 
+        try{
+            $job = $query->getQuery()->getSingleResult();
+        } catch(\Doctrine\Orm\NoResultException $e){
+            $job = null;
+        }
+ 
+        return $job;    
     }
 }

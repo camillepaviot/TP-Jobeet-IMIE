@@ -12,9 +12,18 @@ use Doctrine\Bundle\DoctrineBundle\Command\Proxy\CreateSchemaDoctrineCommand;
  
 class JobControllerTest extends WebTestCase
 {
+    /**
+     *
+     * @var type 
+     */
     private $em;
+    
+    /**
+     *
+     * @var type 
+     */
     private $application;
- 
+    
     public function setUp()
     {
         static::$kernel = static::createKernel();
@@ -66,7 +75,11 @@ class JobControllerTest extends WebTestCase
         $executor = new \Doctrine\Common\DataFixtures\Executor\ORMExecutor($this->em, $purger);
         $executor->execute($loader->getFixtures());
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public function getMostRecentProgrammingJob()
     {
         $kernel = static::createKernel();
@@ -80,7 +93,11 @@ class JobControllerTest extends WebTestCase
  
         return $query->getSingleResult();
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public function getExpiredJob()
     {
         $kernel = static::createKernel();
@@ -93,7 +110,7 @@ class JobControllerTest extends WebTestCase
  
         return $query->getSingleResult();
     }
- 
+    
     public function testIndex()
     {
         // get the custom parameters from app config.yml
@@ -223,6 +240,12 @@ class JobControllerTest extends WebTestCase
         $this->assertTrue(0 == $query->getSingleScalarResult());
     }
     
+    /**
+     * 
+     * @param type $values
+     * @param type $publish
+     * @return type
+     */
     public function createJob($values = array(), $publish = false)
     {
         $client = static::createClient();
@@ -250,7 +273,12 @@ class JobControllerTest extends WebTestCase
 
       return $client;
     }
-
+    
+    /**
+     * 
+     * @param type $position
+     * @return type
+     */
     public function getJobByPosition($position)
     {
         $kernel = static::createKernel();
@@ -271,6 +299,11 @@ class JobControllerTest extends WebTestCase
         $this->assertTrue(404 === $client->getResponse()->getStatusCode());
     }
     
+    /**
+     * 
+     * @param type $token
+     * @throws type
+     */
     public function editAction($token)
     {
         $em = $this->getDoctrine()->getManager();
@@ -284,8 +317,6 @@ class JobControllerTest extends WebTestCase
         if ($entity->getIsActivated()) {
             throw $this->createNotFoundException('Job is activated and cannot be edited.');
         }
-
-      // ...
     }
     
     public function testExtendJob()

@@ -9,6 +9,11 @@ use Ens\JobeetBundle\Entity\Job;
  
 class JobType extends AbstractType
 {
+    /**
+     * 
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -25,14 +30,22 @@ class JobType extends AbstractType
             ->add('email')
         ;
     }
- 
+    
+    /**
+     * 
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Ens\JobeetBundle\Entity\Job'
         ));
     }
- 
+    
+    /**
+     * 
+     * @return string
+     */
     public function getName()
     {
         return 'job';

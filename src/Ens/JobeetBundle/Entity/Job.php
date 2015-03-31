@@ -498,22 +498,32 @@ class Job
         $this->updated_at = new \DateTime();
     }
     
-    
+    /**
+     * 
+     * @return type
+     */
     public function getCompanySlug()
     {
         return Jobeet::slugify($this->getCompany());
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public function getPositionSlug()
     {
         return Jobeet::slugify($this->getPosition());
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public function getLocationSlug()
     {
         return Jobeet::slugify($this->getLocation());
     }
-    
 
     /**
      * @ORM\PrePersist
@@ -527,31 +537,55 @@ class Job
         }
     }
     
+    /**
+     * 
+     * @return type
+     */
     public static function getTypes()
     {
         return array('full-time' => 'Full time', 'part-time' => 'Part time', 'freelance' => 'Freelance');
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public static function getTypeValues()
     {
         return array_keys(self::getTypes());
     }
     
+    /**
+     * 
+     * @return string
+     */
     protected function getUploadDir()
     {
         return 'uploads/jobs';
     }
-
+    
+    /**
+     * 
+     * @return type
+     */
     protected function getUploadRootDir()
     {
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
-
+    
+    /**
+     * 
+     * @return type
+     */
     public function getWebPath()
     {
         return null === $this->logo ? null : $this->getUploadDir().'/'.$this->logo;
     }
-
+    
+    /**
+     * 
+     * @return type
+     */
     public function getAbsolutePath()
     {
         return null === $this->logo ? null : $this->getUploadRootDir().'/'.$this->logo;
@@ -569,6 +603,7 @@ class Job
  
     /**
      * @ORM\PostPersist
+     * @return type
      */
     public function upload()
     {
@@ -599,7 +634,7 @@ class Job
 
     /**
      * @ORM\PrePersist
-     */    
+     */ 
     public function setTokenValue()
     {
         if(!$this->getToken()) {
@@ -607,16 +642,28 @@ class Job
         }
     }
     
+    /**
+     * 
+     * @return type
+     */
     public function isExpired()
     {
         return $this->getDaysBeforeExpires() < 0;
     }
- 
+    
+    /**
+     * 
+     * @return type
+     */
     public function expiresSoon()
     {
         return $this->getDaysBeforeExpires() < 5;    
     }
  
+    /**
+     * 
+     * @return type
+     */
     public function getDaysBeforeExpires()
     {
         return ceil(($this->getExpiresAt()->format('U') - time()) / 86400);
@@ -627,6 +674,10 @@ class Job
         $this->setIsActivated(true);
     }
     
+    /**
+     * 
+     * @return boolean
+     */
     public function extend()
     {
         if (!$this->expiresSoon())
