@@ -13,83 +13,110 @@
         {% block javascripts %}
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('bundles/ensjobeet/images/favicon.ico') }}" />
+
+        <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/font-awesome/css/font-awesome.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/bootstrap/css/bootstrap.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/bootstrap/css/bootstrap-theme.min.css') }}"/>
+        <script src="{{ asset('bundles/ensjobeet/bootstrap/js/bootstrap.min.js') }}"></script>
+
     </head>
     <body>
         <div id="container">
             <div id="header">
-                <div class="content">
-                    <h1><a href="{{ path('EnsJobeetBundle_homepage') }}">
-                            <img src="{{ asset('bundles/ensjobeet/images/logo.jpg') }}" alt="Jobeet Job Board" />
-                        </a></h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <h1>
+                                <a href="{{ path('EnsJobeetBundle_homepage') }}">
+                                    <img src="{{ asset('bundles/ensjobeet/images/logo.jpg') }}" alt="Jobeet Job Board" />
+                                </a>
+                            </h1>
+                        </div>
+                        <div class="col-xs-3 post">
+                            <a href="{{ path('ens_job_new') }}" class="btn btn-default">POST A JOB <i class="fa fa-suitcase" style="margin-left:10px;"></i></a>
+                        </div>
+                    </div>
+                </div>
 
-                    <div id="sub_header">
-                        <div class="post">
-                            <h2>Ask for people</h2>
-                            <div>
-                                <a href="{{ path('ens_job_new') }}">Post a Job</a>
+                <div class="container">
+                    <div class="row" id="sub_header">
+                        <div class="search">
+                            <div class="col-xs-12">
+                                <h2>ASK FOR A JOB <i class="fa fa-angle-double-right"></i></h2>
+                            </div>
+                            <div class="col-xs-12">
+                                <form action="" method="get" class="row" id="form_search">
+                                    <div class="col-xs-10 hidden-xs">
+                                        <input type="text" name="keywords" id="search_keywords" class="form-control"/>
+                                    </div>
+                                    <div class="col-xs-2 hidden-xs">
+                                        <input type="submit" value="search" class="btn btn-default"/>
+                                    </div>
+                                    <div class="input-group col-xs-12 hidden-lg hidden-md hidden-sm">
+                                        <input type="text" class="form-control" name="keywords" id="search_keywords">
+                                        <div class="input-group-addon" onclick="$('form_search').submit();"><i class="fa fa-search"></i></div>
+                                    </div>
+                                    <div class="help col-xs-12">
+                                        Enter some keywords (city, country, position, ...)
+                                    </div>
+                                </form>
                             </div>
                         </div>
-
-                        <div class="search">
-                            <h2>Ask for a job</h2>
-                            <form action="" method="get">
-                                <input type="text" name="keywords" id="search_keywords" />
-                                <input type="submit" value="search" />
-                                <div class="help">
-                                    Enter some keywords (city, country, position, ...)
-                                </div>
-                            </form>
-                        </div>
                     </div>
-                </div>
-            </div>
-            <div id="job_history">
-                Recent viewed jobs:
-                <ul>
-                    {% for job in app.session.get('job_history') %}
-                        <li>
-                            <a href="{{ path('ens_job_show', { 'id': job.id, 'company': job.companyslug, 'location': job.locationslug, 'position': job.positionslug }) }}">{{ job.position }} - {{ job.company }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div id="content">
-                {% for flashMessage in app.session.flashbag.get('notice') %}
-                    <div class="flash-notice">
-                        {{ flashMessage }}
-                    </div>
-                {% endfor %}
-
-
-                {% for flashMessage in app.session.flashbag.get('error') %}
-                    <div class="flash_error">
-                        {{ flashMessage }}
-                    </div>
-                {% endfor %}
-
-
-                <div class="content">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
-
-            <div id="footer">
-                <div class="content">
-                    <span class="symfony">
-                        <img src="{{ asset('bundles/ensjobeet/images/jobeet-mini.png') }}" />
-                        powered by <a href="http://www.symfony.com/">
-                            <img src="{{ asset('bundles/ensjobeet/images/symfony.gif') }}" alt="symfony framework" />
-                        </a>
-                    </span>
-                    <ul>
-                        <li><a href="">About Jobeet</a></li>
-                        <li class="feed"><a href="">Full feed</a></li>
-                        <li><a href="">Jobeet API</a></li>
-                        <li class="last"><a href="">Affiliates</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
-    </body>
+        <div id="job_history" class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    Recent viewed jobs:
+                    <ul>
+                        {% for job in app.session.get('job_history') %}
+                            <li>
+                                <a href="{{ path('ens_job_show', { 'id': job.id, 'company': job.companyslug, 'location': job.locationslug, 'position': job.positionslug }) }}">{{ job.position }} - {{ job.company }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <br/><br/>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="container">
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="flash-notice">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="flash_error">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+            <div class="row">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span class="symfony">
+                            JOBEET powered by <a href="http://www.symfony.com/"><b>Symfony</b></a>
+                        </span>
+                        <ul>
+                            <li><a href="">About Jobeet</a></li>
+                            <li><i class="fa fa-rss" style="color: #ffffff;"></i> <a href="">Full feed</a></li>
+                            <li><a href="">Jobeet API</a></li>
+                            <li class="last"><a href="">Affiliates</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

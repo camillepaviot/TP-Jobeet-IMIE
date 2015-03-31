@@ -1,4 +1,4 @@
-<table class="jobs">
+<table class="jobs table">
   {% for entity in jobs %}
     <tr class="{{ cycle(['even', 'odd'], loop.index) }}">
       <td class="location">{{ entity.location }}</td>

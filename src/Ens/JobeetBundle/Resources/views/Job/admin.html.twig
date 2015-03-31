@@ -25,7 +25,7 @@
                 {% endif %}
  
                 {% if job.expiresSoon %}
-                    <form action="{{ path('ibw_job_extend', { 'token': job.token }) }}" method="post">
+                    <form action="{{ path('ens_job_extend', { 'token': job.token }) }}" method="post">
                         {{ form_widget(extend_form) }}
                         <button type="submit">Extend</button> for another 30 days
                     </form>

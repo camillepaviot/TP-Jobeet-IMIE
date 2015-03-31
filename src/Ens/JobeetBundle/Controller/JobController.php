@@ -51,12 +51,13 @@ class JobController extends Controller
             $em->persist($entity);
             $em->flush();
  
-            return $this->redirect($this->generateUrl('ens_job_show', array(
+            return $this->redirect($this->generateUrl('ens_job_preview', array(
                 'company' => $entity->getCompanySlug(),
                 'location' => $entity->getLocationSlug(),
-                'id' => $entity->getId(),
+                'token' => $entity->getToken(),
                 'position' => $entity->getPositionSlug()
             )));
+            //'token' => $entity->getToken(),
         }
  
         return $this->render('EnsJobeetBundle:Job:new.html.twig', array(
